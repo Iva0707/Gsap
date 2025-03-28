@@ -11,7 +11,15 @@ function setupParallax() {
 
   gsap.utils.toArray(".parallax").forEach((layer) => {
     const speed = layer.dataset.speed;
-    const movement = -(layer.offsetHeight * speed);
+    const direction = layer.dataset.direction || "down";
+    let movement;
+
+    if (direction === "up") {
+      movement = layer.offsetHeight * speed;
+    } else {
+      movement = -(layer.offsetHeight * speed);
+    }
+
     tl.to(layer, { y: movement, ease: "none" }, 0);
   });
 }

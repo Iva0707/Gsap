@@ -10,52 +10,72 @@
 html,
 body {
   font-family: "Kanit", sans-serif;
-  background-color: #000000;
+  background-color: #111111ab;
 }
 
 .hero {
-  position: relative;
-  overflow: hidden;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  background-color: #000000;
-}
-
-.hero__layer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.hero__layer_background {
-  background: url("../img/layer-base.png") bottom center / cover no-repeat;
-}
-
-.hero__layer_overlay {
-  background: url("../img/layer-middle.png") bottom center / cover no-repeat;
-}
-
-.hero__layer_front {
-  top: 100px;
-  background: url("../img/layer-front.png") bottom center / cover no-repeat;
+  padding: 400px 60px 300px;
 }
 
 .hero__title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+  margin-bottom: 200px;
   font-size: 60px;
   text-align: center;
   color: #72a397;
-  transform: translate(-50%, -50%);
+
 }
 
 .hero__title_letter {
   display: inline-block;
   opacity: 0.3;
+}
+
+.hero__wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  max-width: 1400px;
+  width: 100%;
+  margin-inline: auto;
+
+  &:not(:last-child) {
+    margin-bottom: 200px;
+  }
+}
+
+.hero__card {
+  max-width: 300px;
+  text-align: center;
+
+  &.hero__card--hor {
+    max-width: 700px;
+    margin-inline: auto;
+  }
+}
+
+.hero__image {
+  max-width: 100%;
+  margin-bottom: 40px;
+  aspect-ratio: 1;
+
+  .hero__card--hor & {
+    aspect-ratio: 2/1;
+  }
+}
+
+.hero__image_item {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.hero__text {
+  color: #f3eecc;
+  line-height: 1.2;
+  font-size: 20px;
 }
 
 .main_section {
@@ -64,12 +84,16 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 0 50px;
+  height: 100vh;
+  width: 100%;
 }
 
 .main_section__image {
   width: 100%;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0.3;
 }
 
 .main_section__text {
