@@ -1,3 +1,12 @@
+// Fade
+function setupFadeIn() {
+  gsap.utils.toArray(".fade_in").forEach((element) => {
+    const speed = element.dataset.speed || 1;
+    const delay = element.dataset.delay || 1;
+    gsap.fromTo(element, { opacity: 0 }, { opacity: 1, delay: delay, duration: speed, ease: "power3.out" });
+  });
+}
+
 // Parallax
 function setupParallax() {
   const tl = gsap.timeline({
@@ -6,21 +15,24 @@ function setupParallax() {
       start: "top top",
       end: "bottom top",
       scrub: true,
+      onEnter: () => {
+        gsap.utils.toArray(".parallax").forEach((layer) => {
+          const speed = layer.dataset.speed;
+          const direction = layer.dataset.direction || "down";
+
+          const currentY = gsap.getProperty(layer, "y") || 0;
+          let movement;
+
+          if (direction === "up") {
+            movement = layer.offsetHeight * speed;
+          } else {
+            movement = -(layer.offsetHeight * speed);
+          }
+
+          tl.to(layer, { y: currentY + movement, ease: "power3.out" }, 0);
+        });
+      },
     },
-  });
-
-  gsap.utils.toArray(".parallax").forEach((layer) => {
-    const speed = layer.dataset.speed;
-    const direction = layer.dataset.direction || "down";
-    let movement;
-
-    if (direction === "up") {
-      movement = layer.offsetHeight * speed;
-    } else {
-      movement = -(layer.offsetHeight * speed);
-    }
-
-    tl.to(layer, { y: movement, ease: "none" }, 0);
   });
 }
 
@@ -89,9 +101,13 @@ function animateText() {
 }
 
 function initAnimations() {
-  setupParallax();
+  setupFadeIn();
   animateTitle();
   animateText();
+
+  setTimeout(() => {
+    setupParallax();
+  }, 1600);
 }
 
 initAnimations();

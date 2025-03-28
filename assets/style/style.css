@@ -24,12 +24,11 @@ body {
   font-size: 60px;
   text-align: center;
   color: #72a397;
-
 }
 
 .hero__title_letter {
   display: inline-block;
-  opacity: 0.3;
+  opacity: 0;
 }
 
 .hero__wrapper {
